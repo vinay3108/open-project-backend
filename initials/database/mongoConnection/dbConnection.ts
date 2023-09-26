@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-const mongoConnection=async()=>{
-    mongoose.connect('mongodb://127.0.0.1:27017/open_project')
+const mongoConnection=async(mongoURI:string)=>{
+    mongoose.connect(mongoURI)
     .then(()=>{
         console.log('connected to MONGODB');
     })

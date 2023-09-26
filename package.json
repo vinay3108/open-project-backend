@@ -22,18 +22,19 @@
     "express-validator": "^7.0.1",
     "module-alias": "^2.2.3",
     "mongodb": "^6.0.0",
-    "mongoose": "^7.5.0"
+    "mongoose": "^7.5.0",
+    "mysql2": "^3.6.1",
+    "sequelize": "^6.33.0"
   },
   "_moduleAliases": {
-    "@root"      : "./dist", 
-    "@initials"      : "./dist/initials",
-    "@models" : "./dist/models",
-    "@controllers"  : "./dist/controllers",
+    "@root": "./dist",
+    "@initials": "./dist/initials",
+    "@models": "./dist/models",
+    "@controllers": "./dist/controllers",
     "@routes": "./dist/routes",
-    "@interfaces":"./dist/interfaces",
-    "@services" : "./dist/services"
+    "@interfaces": "./dist/interfaces",
+    "@services": "./dist/services"
   },
-  
   "devDependencies": {
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
