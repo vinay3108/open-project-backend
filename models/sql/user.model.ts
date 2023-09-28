@@ -7,8 +7,6 @@ interface UserAttributes {
     email:String;
     password:String;
     userRole:number;
-    createdOn: Date;
-    updatedOn: Date;
 }
 
 export const User = (sequelize: any, DataTypes: any) => {
@@ -18,8 +16,6 @@ export const User = (sequelize: any, DataTypes: any) => {
         email!:String;
         password!:String;
         userRole!:number;
-        createdOn!: Date;
-        updatedOn!: Date;
     }
     User.init(
     {
@@ -47,22 +43,12 @@ export const User = (sequelize: any, DataTypes: any) => {
         userRole: {
             type:DataTypes.BIGINT,
             allowNull:false,
-        },
-        createdOn: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-            allowNull: false,
-        },
-        updatedOn: {
-            type: DataTypes.DATE,
-            defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-            allowNull: true,
         }
     },
     {
         sequelize,
         modelName: "user",
-        timestamps: false,
+        timestamps: true,
     });
     return User;
 }

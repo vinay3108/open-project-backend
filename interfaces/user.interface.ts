@@ -1,7 +1,9 @@
 interface IUser {
-    name: string;
-    email: string;
-    password: string;
+    id:bigint;
+    name:String;
+    email:String;
+    password:String;
+    userRole:number;
 }
 
 
