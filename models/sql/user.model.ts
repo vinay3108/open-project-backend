@@ -26,17 +26,17 @@ export const User = (sequelize: any, DataTypes: any) => {
             primaryKey: true,
         },
         name : {
-            type:DataTypes.String(100),
+            type:DataTypes.STRING(100),
             allowNull:false,
             
         },
         email : {
-            type:DataTypes.String(100),
+            type:DataTypes.STRING(100),
             allowNull:false,
 
         },
         password : {
-            type:DataTypes.String(100),
+            type:DataTypes.STRING(100),
             allowNull:false,
 
         },
