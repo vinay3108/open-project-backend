@@ -1,33 +1,25 @@
-import { sequelize } from "@root/initials/database";
-import { DataTypes } from "sequelize";
-import {User as sqlUserService } from "@models/sql/user.model";
 import { IService } from "@root/interfaces";
 import { IUser } from "@root/interfaces/user.interface";
-const user = sqlUserService(sequelize,DataTypes);
 class UserService implements IService {
-    
+    user: IService;
+
+    constructor(user :IService){
+        this.user = user;
+    }    
     getAll = async()=>{
-        return await user.findAll({});
+        return await this.user.getAll();
     }
     create = async(body :IUser)=>{
-        return await user.create(body);
+        return await this.user.create(body);
     }
     get = async(id:string)=>{
-        return await user.findByPk(id);
+        return await this.user.get(id);
     }
     update =async(id:string, body:any)=>{
-        return await user.update(body, {
-            where: {
-                id: Number(id)
-            }
-        });
+        return await this.user.update(id,body);
     }
     delete= async(id: string)=> {
-        return await user.destroy({
-            where: {
-                id: Number(id)
-            }
-        });
+        return await this.user.delete(id);
     }
 }
 export {UserService};

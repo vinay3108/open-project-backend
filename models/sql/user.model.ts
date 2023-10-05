@@ -1,21 +1,31 @@
 "use strict";
-import {Model} from 'sequelize';
+import {Model,DataTypes} from 'sequelize';
+import { sequelize } from '@root/initials/database';
 
 interface UserAttributes {
-    id:bigint;
+    id?:bigint;
     name:String;
     email:String;
     password:String;
     userRole:number;
+    createdAt?: Date;
+    updatedAt?: Date;
+    deletedAt?: Date;
 }
+export interface UserInput extends Required<UserAttributes> {}
+export interface UserOutput extends Required<UserAttributes> {}
 
-export const User = (sequelize: any, DataTypes: any) => {
-    class User extends Model<UserAttributes> implements UserAttributes {
+class User extends Model<UserAttributes> implements UserAttributes {
+        
         id!:bigint;
         name!:String;
         email!:String;
         password!:String;
         userRole!:number;
+
+        public readonly createdAt!: Date;
+        public readonly updatedAt!: Date;
+        public readonly deletedAt!: Date;
     }
     User.init(
     {
@@ -49,7 +59,7 @@ export const User = (sequelize: any, DataTypes: any) => {
         sequelize,
         modelName: "user",
         timestamps: true,
-    });
-    return User;
-}
+    })
+
+export default User;
 
