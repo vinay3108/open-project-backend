@@ -1,17 +1,8 @@
 "use strict";
 import {Model,DataTypes} from 'sequelize';
 import { sequelize } from '@root/initials/database';
+import { UserAttributes } from '@root/interfaces/user.interface';
 
-interface UserAttributes {
-    id?:bigint;
-    name:String;
-    email:String;
-    password:String;
-    userRole:number;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
-}
 export interface UserInput extends Required<UserAttributes> {}
 export interface UserOutput extends Required<UserAttributes> {}
 

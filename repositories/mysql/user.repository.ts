@@ -3,7 +3,7 @@ import {Op} from 'sequelize'
 import { UserInput,UserOutput } from '@root/models/sql/user.model'
 import User from '@root/models/sql/user.model';
 
-class UserRepository implements IService{
+class UserSqlRepository implements IService{
 
     create = async (payload: UserInput): Promise<UserOutput> => {
     const user = await User.create(payload)
@@ -25,4 +25,4 @@ class UserRepository implements IService{
 
 
 }
-export default UserRepository;
+export default UserSqlRepository;
