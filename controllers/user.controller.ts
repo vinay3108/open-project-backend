@@ -18,9 +18,9 @@ class UserController {
                 min: 4,
                 max: 8,
             }).notEmpty();
-            
-            const {name,email,password} =req.body;
-            const user = await this.userService.create({name,password});
+
+            const {name,email,password,userRole} =req.body;
+            const user = await this.userService.create({name,email,password,userRole});
             res.status(200).json({
                 name:user.name,
                 email:user.email
