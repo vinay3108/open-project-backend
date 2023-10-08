@@ -7,6 +7,6 @@ import { UserService } from '@root/services/user.service';
 const userController = new UserController(new UserService(new UserSqlRepository));
 
 router.route('/').post(userController.createUser).get(userController.getUsers);
-router.route('/:id').get(userController.getUser).post(userController.updateUser);
+router.route('/:id').get(userController.getUser).post(userController.updateUser).put(userController.updateUserRole);
 
 export  {router};

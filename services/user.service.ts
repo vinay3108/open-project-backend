@@ -1,11 +1,11 @@
-import { IService } from "@root/interfaces";
 import { IUser } from "@root/interfaces/user.interface";
-class UserService implements IService {
-    user: IService;
+import { IUserService } from "@root/interfaces/user.interface";
+class UserService  {
+    user: IUserService;
 
-    constructor(user :IService){
+    constructor(user :IUserService){
         this.user = user;
-    }    
+    }
     getAll = async()=>{
         return await this.user.getAll();
     }
@@ -18,8 +18,11 @@ class UserService implements IService {
     update =async(id:string, body:any)=>{
         return await this.user.update(id,body);
     }
-    delete= async(id: string)=> {
+    delete = async(id: string)=> {
         return await this.user.delete(id);
+    }
+    updateRole =async(id:bigint,roleId:number) =>{
+        return await this.user.updateRole(id,roleId);
     }
 }
 export {UserService};

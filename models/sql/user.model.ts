@@ -2,6 +2,7 @@
 import {Model,DataTypes} from 'sequelize';
 import { sequelize } from '@root/initials/database';
 import { UserAttributes } from '@root/interfaces/user.interface';
+import Role from './role.model';
 
 export interface UserInput extends Required<UserAttributes> {}
 export interface UserOutput extends Required<UserAttributes> {}
@@ -51,6 +52,11 @@ class User extends Model<UserAttributes> implements UserAttributes {
         modelName: "user",
         timestamps: true,
     })
+
+    User.hasOne(Role, {
+        foreignKey: 'role_id', // Custom foreign key
+        sourceKey: 'userRole', // Custom local key in User model
+    });
 
 export default User;
 

@@ -1,10 +1,10 @@
 import { Request,Response } from "express"
 import {body, param} from 'express-validator';
-import { IService } from "@root/interfaces";
+import { IUserService } from "@root/interfaces/user.interface";
 
 
 class UserController {
-    constructor(private userService: IService){
+    constructor(private userService: IUserService){
     }
     getUsers =async (req:Request,res:Response)=>{
         const users = await this.userService.getAll();
@@ -48,6 +48,20 @@ class UserController {
             param('id','Please Enter User id').notEmpty();
             const {id} =req.params;
             await this.userService.update(id,req.body);
+            res.send("User successfully updated");
+        }catch(err:any){
+            console.log("here");
+            res.status(500).json({err:err.message});
+        }
+    }
+    updateUserRole= async(req:Request,res:Response)=>{
+        try{
+            param('id','Please Enter User id').notEmpty();
+            body('userRole','Please Enter User Role').notEmpty();
+
+            const {id} =req.params;
+            const {userRole} =req.body;
+            await this.userService.updateRole(BigInt(id),Number(userRole));
             res.send("User successfully updated");
         }catch(err:any){
             console.log("here");

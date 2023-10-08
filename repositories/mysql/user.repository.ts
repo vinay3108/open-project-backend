@@ -1,28 +1,18 @@
-import { IService } from '@root/interfaces'
-import {Op} from 'sequelize'
-import { UserInput,UserOutput } from '@root/models/sql/user.model'
 import User from '@root/models/sql/user.model';
+import BaseSqlRepository from './base.repository';
+import { IUserService } from '@root/interfaces/user.interface';
 
-class UserSqlRepository implements IService{
-
-    create = async (payload: UserInput): Promise<UserOutput> => {
-    const user = await User.create(payload)
-    return user;
+class UserSqlRepository extends BaseSqlRepository implements IUserService{
+    constructor(){
+        super(User);
     }
-    getAll =async()=>{
-        const user=await User.findAll({});
-        return user;
+    updateRole = async (id:any,roleId:number) =>{
+        const user = await User.findByPk(id);
+        if(!user){
+            return false;
+        }
+        await user.update({userRole:roleId});
+        await user.save();
     }
-    get=(id:string)=>{
-
-    }
-    update=(id:string,body:any)=>{
-
-    }
-    delete = (id:string)=>{ 
-
-    }
-
-
 }
 export default UserSqlRepository;

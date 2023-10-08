@@ -1,3 +1,5 @@
+import { IService } from "./index";
+
 export interface UserAttributes {
     id?:bigint;
     name:String;
@@ -10,7 +12,9 @@ export interface UserAttributes {
 }
 
 interface IUser extends Required<UserAttributes> {}
-
+export interface IUserService extends IService{
+    updateRole(id:bigint,roleId:number) :any;
+}
 
 export {
     IUser,
