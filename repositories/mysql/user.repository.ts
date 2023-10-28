@@ -1,8 +1,8 @@
 import User from '@root/models/sql/user.model';
 import BaseSqlRepository from './base.repository';
-import { IUserService } from '@root/interfaces/user.interface';
+import { IUserRepository } from '@root/interfaces/user.interface';
 
-class UserSqlRepository extends BaseSqlRepository implements IUserService{
+class UserSqlRepository extends BaseSqlRepository implements IUserRepository{
     constructor(){
         super(User);
     }

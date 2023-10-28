@@ -1,13 +1,13 @@
 import { Request,Response } from "express"
 import {body, param} from 'express-validator';
 import { IUserService } from "@root/interfaces/user.interface";
-
+import { successMessage } from "@root/utils/responseHandler";
 
 class UserController {
     constructor(private userService: IUserService){
     }
     getUsers =async (req:Request,res:Response)=>{
-        const users = await this.userService.getAll();
+        const users = await this.userService.getUsers();
         res.send(users);
     }
     createUser= async(req:Request,res:Response)=>{
@@ -20,10 +20,10 @@ class UserController {
             }).notEmpty();
 
             const {name,email,password,userRole} =req.body;
-            const user = await this.userService.create({name,email,password,userRole});
-            res.status(200).json({
-                name:user.name,
-                email:user.email
+            const user = await this.userService.createUser({name,email,password,userRole});
+            return successMessage({
+                statusCode:200,
+                data:user
             });
         }catch(err:any){
             res.status(500).json({err:err.message});
@@ -34,10 +34,10 @@ class UserController {
             param('id','Please Enter User id').notEmpty();
             
             const {id} =req.params;
-            const user = await this.userService.get(id);
-            res.status(200).json({
-                name:user.name,
-                email:user.email
+            const user = await this.userService.getUser(id);
+            return successMessage({
+                statusCode:200,
+                data:user
             });
         }catch(err:any){
             res.status(500).json({err:err.message});
@@ -47,8 +47,11 @@ class UserController {
         try{
             param('id','Please Enter User id').notEmpty();
             const {id} =req.params;
-            await this.userService.update(id,req.body);
-            res.send("User successfully updated");
+            await this.userService.updateUser(id,req.body);
+            return successMessage({
+                statusCode:200,
+                message:"User successfully updated"
+            });
         }catch(err:any){
             console.log("here");
             res.status(500).json({err:err.message});
@@ -61,8 +64,11 @@ class UserController {
 
             const {id} =req.params;
             const {userRole} =req.body;
-            await this.userService.updateRole(BigInt(id),Number(userRole));
-            res.send("User successfully updated");
+            await this.userService.updateUserRole(BigInt(id),Number(userRole));
+            return successMessage({
+                statusCode:200,
+                message:"User successfully updated"
+            });
         }catch(err:any){
             console.log("here");
             res.status(500).json({err:err.message});

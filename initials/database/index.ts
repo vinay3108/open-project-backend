@@ -12,25 +12,23 @@ const sequelize = new Sequelize('open_project', 'root', 'password', {
 });
 
 const mongoURI='mongodb://127.0.0.1:27017/open_project';
-async function syncModel() {
-    try {
-      // await User.sync();
-      // await Role.sync();
-      console.log('Models synchronized with the database.');
-    } catch (error) {
-      console.error('Error synchronizing models:', error);
-    }
-  };
+
 const connectDatbase= async ()=>{
-    try{
+    
 
         await sqlConnection(sequelize);
         await mongoConnection(mongoURI);
-        // await syncModel();
-    }catch(err){
-        console.log('helll',err);
-    }
+    
 }
+async function syncModel() {
+  try {
+    // await User.sync();
+    // await Role.sync();
+    console.log('Models synchronized with the database.');
+  } catch (error) {
+    console.error('Error synchronizing models:', error);
+  }
+};
 
 export {sequelize};
 export default connectDatbase;

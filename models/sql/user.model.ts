@@ -53,10 +53,10 @@ class User extends Model<UserAttributes> implements UserAttributes {
         timestamps: true,
     })
 
-    User.hasOne(Role, {
-        foreignKey: 'role_id', // Custom foreign key
-        sourceKey: 'userRole', // Custom local key in User model
-    });
+    // User.hasOne(Role, {
+    //     foreignKey: 'role_id', // Custom foreign key
+    //     sourceKey: 'userRole', // Custom local key in User model
+    // });
 
 export default User;
 
