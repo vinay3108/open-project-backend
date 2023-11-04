@@ -8,7 +8,10 @@ class UserController {
     }
     getUsers =async (req:Request,res:Response)=>{
         const users = await this.userService.getUsers();
-        res.send(users);
+        return successMessage(res,{
+            statusCode:200,
+            data:users
+        });
     }
     createUser= async(req:Request,res:Response)=>{
         try{
@@ -21,7 +24,7 @@ class UserController {
 
             const {name,email,password,userRole} =req.body;
             const user = await this.userService.createUser({name,email,password,userRole});
-            return successMessage({
+            return successMessage(res,{
                 statusCode:200,
                 data:user
             });
@@ -35,7 +38,7 @@ class UserController {
             
             const {id} =req.params;
             const user = await this.userService.getUser(id);
-            return successMessage({
+            return successMessage(res,{
                 statusCode:200,
                 data:user
             });
@@ -48,7 +51,7 @@ class UserController {
             param('id','Please Enter User id').notEmpty();
             const {id} =req.params;
             await this.userService.updateUser(id,req.body);
-            return successMessage({
+            return successMessage(res,{
                 statusCode:200,
                 message:"User successfully updated"
             });
@@ -65,7 +68,7 @@ class UserController {
             const {id} =req.params;
             const {userRole} =req.body;
             await this.userService.updateUserRole(BigInt(id),Number(userRole));
-            return successMessage({
+            return successMessage(res,{
                 statusCode:200,
                 message:"User successfully updated"
             });
